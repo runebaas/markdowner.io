@@ -1,8 +1,8 @@
 {
-  "name": "mediawiki-to-markdown",
-  "version": "1.0.0",
-  "description": "A tool that converts mediawiki syntax to markdown syntax",
-  "author": "Daan Boerlage <dboerlage@cimpress.com>",
+  "name": "markdowner",
+  "version": "0.5.0",
+  "description": "A tool that converts markup languages to markdown",
+  "author": "Daan Boerlage <runebaas@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
