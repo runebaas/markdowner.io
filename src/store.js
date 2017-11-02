@@ -12,6 +12,7 @@ const store = new Vuex.Store({
     }),
   ],
   state: {
+    hasUpdate: false,
     settings: {
       selectedLanguage: 'reStructuredText',
       useDarkTheme: false,
@@ -19,6 +20,9 @@ const store = new Vuex.Store({
     },
   },
   mutations: {
+    hasUpdate(state, yayornay) {
+      state.hasUpdate = yayornay;
+    },
     setLanguage(state, language) {
       state.settings.selectedLanguage = language;
     },

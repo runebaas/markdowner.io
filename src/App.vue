@@ -2,7 +2,7 @@
   <v-app id="inspire" :dark="useDarkTheme">
     <v-toolbar
       app
-      clipped-left  
+      clipped-left
       fixed>
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">Markdowner <span>Alpha</span></v-toolbar-title>
 
@@ -14,6 +14,10 @@
               bottom
       ></v-select>
       <v-spacer></v-spacer>
+      <v-btn flat @click="applyUpdate" v-if="hasUpdate">
+        <v-icon>cached</v-icon>
+        <span>Update</span>
+      </v-btn>
       <v-btn flat @click="toggleDark">
         <v-icon>invert_colors</v-icon>
         <span>Dark</span>
@@ -58,25 +62,21 @@
 </template>
 
 <script>
+  import Vue from 'vue';
   import * as wiki2md from 'wikitext2markdown';
   import * as J2M from 'j2m';
   import * as rst2mdown from 'rst2mdown';
   import * as marked from 'marked';
   import * as htmlToMarkdown from 'to-markdown';
-  import store from './store';
 
   export default {
     name: 'app',
     created() {
-      this.selectedLang = store.state.settings.selectedLanguage;
-      this.rendered = store.state.settings.renderMarkdown;
-      this.useDarkTheme = store.state.settings.useDarkTheme;
-      this.isLoading = false;
+      this.selectedLang = Vue.$store.state.settings.selectedLanguage;
     },
     data() {
       return {
         input: '',
-        isLoading: true,
         languages: [
           'reStructuredText',
           'WikiText',
@@ -108,23 +108,29 @@
         return marked(this.output);
       },
       rendered() {
-        return store.state.settings.renderMarkdown;
+        return Vue.$store.state.settings.renderMarkdown;
       },
       useDarkTheme() {
-        return store.state.settings.useDarkTheme;
+        return Vue.$store.state.settings.useDarkTheme;
+      },
+      hasUpdate() {
+        return Vue.$store.state.hasUpdate;
       },
     },
     watch: {
       selectedLang() {
-        store.commit('setLanguage', this.selectedLang);
+        Vue.$store.commit('setLanguage', this.selectedLang);
       },
     },
     methods: {
       toggleDark() {
-        store.commit('toggleDarkTheme');
+        Vue.$store.commit('toggleDarkTheme');
       },
       toggleRendered() {
-        store.commit('toggleRenderMarkdown');
+        Vue.$store.commit('toggleRenderMarkdown');
+      },
+      applyUpdate() {
+        window.location.reload();
       },
     },
   };
@@ -141,6 +147,10 @@
 
   .renderedMarkdown {
     height: 90vh;
-    overflow: scroll;
+    overflow: auto;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
   }
 </style>

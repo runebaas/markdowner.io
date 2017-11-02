@@ -13,6 +13,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const loadMinified = require('./load-minified')
+const OfflinePlugin = require('offline-plugin')
 
 const env = config.build.env
 
@@ -33,6 +34,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
+    }),
+    new OfflinePlugin({
+      ServiceWorker: {
+        events: true
+      }
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
