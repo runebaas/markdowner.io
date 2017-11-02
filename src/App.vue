@@ -4,7 +4,7 @@
       app
       clipped-left
       fixed>
-      <v-toolbar-title style="width: 300px" class="ml-0 pl-3">Markdowner</v-toolbar-title>
+      <v-toolbar-title style="width: 300px" class="ml-0 pl-3">Markdowner <span>Alpha</span></v-toolbar-title>
 
       <v-select
               v-bind:items="languages"
@@ -14,8 +14,17 @@
               bottom
       ></v-select>
       <v-spacer></v-spacer>
-      <v-switch label="Rendered" v-model="rendered"></v-switch>
-      <v-switch label="Dark Theme" v-model="useDarkTheme"></v-switch>
+      <v-btn icon flat @click="toggleDark">
+        <v-icon>invert_colors</v-icon>
+        <span>Dark</span>
+      </v-btn>
+      <v-btn icon flat @click="toggleRendered">
+        <v-icon>code</v-icon>
+        <span>Render</span>
+      </v-btn>
+      <v-btn icon>
+        <v-icon>info</v-icon>
+      </v-btn>
     </v-toolbar>
     <main>
       <v-content>
@@ -54,12 +63,20 @@
   import * as rst2mdown from 'rst2mdown';
   import * as marked from 'marked';
   import * as htmlToMarkdown from 'to-markdown';
+  import store from './store';
 
   export default {
     name: 'app',
+    created() {
+      this.selectedLang = store.state.settings.selectedLanguage;
+      this.rendered = store.state.settings.renderMarkdown;
+      this.useDarkTheme = store.state.settings.useDarkTheme;
+      this.isLoading = false;
+    },
     data() {
       return {
         input: '',
+        isLoading: true,
         languages: [
           'reStructuredText',
           'WikiText',
@@ -68,8 +85,6 @@
           'Markdown',
         ],
         selectedLang: 'reStructuredText',
-        rendered: false,
-        useDarkTheme: false,
       };
     },
     computed: {
@@ -92,11 +107,30 @@
       renderedOutput() {
         return marked(this.output);
       },
+      rendered() {
+        return store.state.settings.renderMarkdown;
+      },
+      useDarkTheme() {
+        return store.state.settings.useDarkTheme;
+      },
+    },
+    watch: {
+      selectedLang() {
+        store.commit('setLanguage', this.selectedLang);
+      },
+    },
+    methods: {
+      toggleDark() {
+        store.commit('toggleDarkTheme');
+      },
+      toggleRendered() {
+        store.commit('toggleRenderMarkdown');
+      },
     },
   };
 </script>
 
-<style>
+<style lang="scss">
   body {
     margin: 0;
   }

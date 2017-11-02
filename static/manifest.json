@@ -1,6 +1,6 @@
 {
-  "name": "mediawiki-to-markdown",
-  "short_name": "mw2md",
+  "name": "markdowner",
+  "short_name": "mder",
   "icons": [
     {
       "src": "/static/img/icons/android-chrome-192x192.png",
