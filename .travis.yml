@@ -14,6 +14,7 @@ deploy:
     secure: DwPkSk1RWRH5vj/98LQ100I38kh0Zn50zuLLJgTMRAPkBg5MKiqFD+JN8aTQU8GrQ0qiq+mhokSVuwHKy4sS/QmUAl3mW0LGMY12ywJL4INFRoiH0FvjuvaM0omTw5J6fGv/2kVbAfyzXW7D7R61xjyNPPvDI+vYq8uUU4ol71eSZt54Chq7wzay7H0QwFz/fDUL78ReFZHRbR+0jCKya+k9atMh/DFo4HuhwkVNltF63xYMGEQCeprhbyKhQfSTc5MzsicNd84nVGdKWOi2LdZTAdP7ZH03L416EyILqNR5uthtWSNPxgoRSz5YuXAMjMsC9VG3rZG0ANXssiDFoyLUXFlR7ThXp2hwWyVLyRcagWAZL3KCjl5JRjrTERiJf6dUsY4FfbyJpxiat420615tpLY90W4HUA/w2ba6FkbilLOwTEQW+kNv/TboOTZuDr8d15gg8w7bGzKWgf/td86CCv9vqnSgq5EUzD/SDGFcXo1wjRVPKxqvSZYQCFkfzqLRl/Oi2tIsGt7/Grezi7OLOho/L/m89AM/x3U+Bk9dberaBoLbH0cYgGSwG5XSPzy8RpKMoEsKlEiVVY1iarkHErntM6+6FgHfmeBC/89dkyEb57CsG07OfvqyyB39pI7LbY3J0v/mjbYatpHyBxtsiVp8F0YPU5R9lhmrHGA=
   bucket: markdowner.io
   local_dir: ./dist/
+  skip_cleanup: false
   region: eu-west-1
   on:
     branch: master
