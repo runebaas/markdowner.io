@@ -2,7 +2,7 @@
   <v-app id="inspire" :dark="useDarkTheme">
     <v-toolbar
       app
-      clipped-left
+      clipped-left  
       fixed>
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">Markdowner <span>Alpha</span></v-toolbar-title>
 
@@ -14,11 +14,11 @@
               bottom
       ></v-select>
       <v-spacer></v-spacer>
-      <v-btn icon flat @click="toggleDark">
+      <v-btn flat @click="toggleDark">
         <v-icon>invert_colors</v-icon>
         <span>Dark</span>
       </v-btn>
-      <v-btn icon flat @click="toggleRendered">
+      <v-btn flat @click="toggleRendered">
         <v-icon>code</v-icon>
         <span>Render</span>
       </v-btn>
