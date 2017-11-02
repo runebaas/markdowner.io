@@ -26,7 +26,7 @@
         <v-icon>code</v-icon>
         <span>Render</span>
       </v-btn>
-      <v-btn icon>
+      <v-btn icon @click.native.stop="dialog = true">
         <v-icon>info</v-icon>
       </v-btn>
     </v-toolbar>
@@ -58,6 +58,16 @@
         </v-container>
       </v-content>
     </main>
+    <v-dialog v-model="dialog">
+      <v-card>
+        <v-card-title class="headline">Markdowner Alpha</v-card-title>
+        <v-card-text>Markdowner is an open source tool to edit markdown and convert a set of other markup languages to markdown</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" flat="flat"><a href="http://google/com" target="_blank">Github</a></v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 
@@ -71,9 +81,6 @@
 
   export default {
     name: 'app',
-    created() {
-      this.selectedLang = Vue.$store.state.settings.selectedLanguage;
-    },
     data() {
       return {
         input: '',
@@ -85,7 +92,11 @@
           'Markdown',
         ],
         selectedLang: 'reStructuredText',
+        dialog: false,
       };
+    },
+    created() {
+      this.selectedLang = Vue.$store.state.settings.selectedLanguage;
     },
     computed: {
       output() {
@@ -139,6 +150,7 @@
 <style lang="scss">
   body {
     margin: 0;
+    overflow: hidden;
   }
 
   textarea {
@@ -148,6 +160,18 @@
   .renderedMarkdown {
     height: 90vh;
     overflow: auto;
+    h1 {
+      font-size: 6em;
+    }
+    h2 {
+      font-size: 5em;
+    }
+    h3 {
+      font-size: 4em;
+    }
+    h4 {
+      font-size: 3em;
+    }
   }
 
   ::-webkit-scrollbar {

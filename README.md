@@ -1,21 +1,3 @@
-# mediawiki-to-markdown
+# [Markdowner](http://markdowner.io)
 
-> A tool that converts mediawiki syntax to markdown syntax
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Markdowner is an open source tool to edit markdown and convert a set of other markup languages to markdown
