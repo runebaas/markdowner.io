@@ -22,7 +22,6 @@ if (!Vue.$isLocalhost) {
     },
     onUpdated: () => {
       Vue.$store.commit('hasUpdate', true);
-      window.location.reload();
     },
   });
 }
