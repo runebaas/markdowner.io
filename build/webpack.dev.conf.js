@@ -3,12 +3,15 @@
 const fs = require('fs')
 const path = require('path')
 const utils = require('./utils')
+const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const webpack = require('webpack')
 const config = require('../config')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+
+const gitRevisionPlugin = new GitRevisionPlugin()
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -35,6 +38,13 @@ module.exports = merge(baseWebpackConfig, {
       inject: true,
       serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
         './service-worker-dev.js'), 'utf-8')}</script>`
+    }),
+    new webpack.DefinePlugin({
+      GIT_INFO: JSON.stringify({
+        branch: gitRevisionPlugin.branch(),
+        commitHash: gitRevisionPlugin.commithash(),
+        commitHashShort: gitRevisionPlugin.version()
+      })
     }),
     new FriendlyErrorsPlugin()
   ]

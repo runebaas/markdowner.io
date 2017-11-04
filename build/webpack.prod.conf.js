@@ -10,12 +10,15 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+let GitRevisionPlugin = require('git-revision-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const loadMinified = require('./load-minified')
 const OfflinePlugin = require('offline-plugin')
 
 const env = config.build.env
+
+const gitRevisionPlugin = new GitRevisionPlugin();
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -39,6 +42,13 @@ const webpackConfig = merge(baseWebpackConfig, {
       ServiceWorker: {
         events: true
       }
+    }),
+    new webpack.DefinePlugin({
+      GIT_INFO: JSON.stringify({
+        branch: gitRevisionPlugin.branch(),
+        commitHash: gitRevisionPlugin.commithash(),
+        commitHashShort: gitRevisionPlugin.version()
+      })
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {

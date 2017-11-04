@@ -63,8 +63,9 @@
         <v-card-title class="headline">Markdowner Alpha</v-card-title>
         <v-card-text>Markdowner is an open source tool to edit markdown and convert a set of other markup languages to markdown</v-card-text>
         <v-card-actions>
+          <span>Version {{ version }}</span>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" flat="flat"><a href="http://google/com" target="_blank">Github</a></v-btn>
+          <v-btn color="green darken-1" flat="flat" href="https://github.com/runebaas/markdowner.io" target="_blank">Github</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -127,6 +128,9 @@
       hasUpdate() {
         return Vue.$store.state.hasUpdate;
       },
+      version() {
+        return GIT_INFO !== null ? GIT_INFO.commitHashShort : 'dev';
+      },
     },
     watch: {
       selectedLang() {
@@ -161,16 +165,16 @@
     height: 90vh;
     overflow: auto;
     h1 {
-      font-size: 6em;
-    }
-    h2 {
       font-size: 5em;
     }
-    h3 {
+    h2 {
       font-size: 4em;
     }
-    h4 {
+    h3 {
       font-size: 3em;
+    }
+    h4 {
+      font-size: 2em;
     }
   }
 
