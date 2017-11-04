@@ -43,14 +43,15 @@
             ></v-text-field>
           </v-flex>
           <v-flex xs6>
-            <v-text-field
-                    v-if="!rendered"
-                    label="Markdown"
-                    full-width
-                    multi-line
-                    v-model="output"
-                    readonly
-            ></v-text-field>
+            <!--<v-text-field-->
+                    <!--v-if="!rendered"-->
+                    <!--label="Markdown"-->
+                    <!--full-width-->
+                    <!--multi-line-->
+                    <!--v-model="output"-->
+                    <!--readonly-->
+            <!--&gt;</v-text-field>-->
+            <pre v-if="!rendered" class="highlightedMarkdown" v-highlightjs="output"><code class="markdown" :style="codeColor"></code></pre>
             <div v-else class="renderedMarkdown">
               <div v-html="renderedOutput"></div>
             </div>
@@ -131,6 +132,11 @@
       version() {
         return GIT_INFO !== null ? GIT_INFO.commitHashShort : 'dev';
       },
+      codeColor() {
+        const lightColors = 'background-color: #fafafa; color: #bd4147;';
+        const darkColors = 'background-color: #303030;';
+        return this.useDarkTheme ? darkColors : lightColors;
+      },
     },
     watch: {
       selectedLang() {
@@ -159,6 +165,11 @@
 
   textarea {
     height: 90vh;
+  }
+
+  .highlightedMarkdown {
+    height: 90vh;
+    overflow: auto;
   }
 
   .renderedMarkdown {
