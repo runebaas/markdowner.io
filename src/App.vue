@@ -12,6 +12,7 @@
               label="Select"
               single-line
               bottom
+              style="margin-top: 25px"
       ></v-select>
       <v-spacer></v-spacer>
       <v-btn flat @click="applyUpdate" v-if="hasUpdate">
@@ -50,7 +51,7 @@
                     <!--multi-line-->
                     <!--v-model="output"-->
                     <!--readonly-->
-            <!--&gt;</v-text-field>-->
+            <!--;</v-text-field>-->
             <pre v-if="!rendered" class="highlightedMarkdown" v-highlightjs="output"><code class="markdown" :style="codeColor"></code></pre>
             <div v-else class="renderedMarkdown">
               <div v-html="renderedOutput"></div>
@@ -133,9 +134,9 @@
         return GIT_INFO !== null ? GIT_INFO.commitHashShort : 'dev';
       },
       codeColor() {
-        const lightColors = 'background-color: #fafafa; color: #bd4147;';
-        const darkColors = 'background-color: #303030;';
-        return this.useDarkTheme ? darkColors : lightColors;
+        const lightColor = 'font-size: 100%; background-color: #fafafa; color: rgba(0,0,0,.87);';
+        const darkColors = 'font-size: 100%; background-color: #303030;';
+        return this.useDarkTheme ? darkColors : lightColor;
       },
     },
     watch: {
