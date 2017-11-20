@@ -159,6 +159,7 @@
 </script>
 
 <style lang="scss">
+  @import "~vuetify/dist/vuetify.min.css";
   body {
     margin: 0;
     overflow: hidden;
